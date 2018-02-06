@@ -30,6 +30,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mSendButton;
 
     private String mUsername;
+
+    FirebaseDatabase database;
+    DatabaseReference databaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
                 mMessageEditText.setText("");
             }
         });
+
+        initialFirebaseDatabase();
+    }
+
+    private void initialFirebaseDatabase() {
+        // Write a message to the database
+        database = FirebaseDatabase.getInstance();
+        databaseRef = database.getReference().child("message");
     }
 
     @Override
